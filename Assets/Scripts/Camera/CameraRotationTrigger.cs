@@ -15,7 +15,7 @@ public class CameraRotationTrigger : MonoBehaviour
 
     CameraRotation cameraRotation = null;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         cameraRotation = cameraRorator.GetComponent<CameraRotation>();
@@ -28,7 +28,6 @@ public class CameraRotationTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             cameraRotation.RotateTo(CameraRotationDirection.ToVector(targetDirection));
-            Debug.Log("rotated");
         }
     }
 

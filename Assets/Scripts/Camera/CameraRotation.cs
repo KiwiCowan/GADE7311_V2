@@ -12,7 +12,7 @@ public class CameraRotation : MonoBehaviour
 
     Quaternion targetRotation = Quaternion.identity;
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (transform.rotation != targetRotation)
@@ -21,9 +21,10 @@ public class CameraRotation : MonoBehaviour
         }
     }
 
-    public void RotateTo(Vector3 to)// change "to" to a better name
+    public void RotateTo(Vector3 newRotation)
     {
-        Vector3 relativePos = transform.position + to;
+        Vector3 relativePos = transform.position + newRotation;
+        
 
         targetRotation = Quaternion.LookRotation(relativePos - transform.position, Vector3.up);
     }

@@ -7,7 +7,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField]
     float speed = 0.25f;
     [SerializeField]
-    float raylength = 1.4f;
+    float rayLength = 1.4f;
     [SerializeField]
     float rayOffsetX = 0.5f;
     [SerializeField]
@@ -48,6 +48,65 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
+        // Set the ray positions every frame
+
+        yOffset = transform.position + Vector3.up * rayOffsetY;
+        zOffset = Vector3.forward * rayOffsetZ;
+        xOffset = Vector3.right * rayOffsetX;
+
+        zAxisOriginA = yOffset + xOffset;
+        zAxisOriginB = yOffset - xOffset;
+
+        xAxisOriginA = yOffset + zOffset;
+        xAxisOriginB = yOffset - zOffset;
+
+        // Draw Debug Rays
+
+        Debug.DrawLine(
+                zAxisOriginA,
+                zAxisOriginA + Vector3.forward * rayLength,
+                Color.red,
+                Time.deltaTime);
+        Debug.DrawLine(
+                zAxisOriginB,
+                zAxisOriginB + Vector3.forward * rayLength,
+                Color.red,
+                Time.deltaTime);
+
+        Debug.DrawLine(
+                zAxisOriginA,
+                zAxisOriginA + Vector3.back * rayLength,
+                Color.red,
+                Time.deltaTime);
+        Debug.DrawLine(
+                zAxisOriginB,
+                zAxisOriginB + Vector3.back * rayLength,
+                Color.red,
+                Time.deltaTime);
+
+        Debug.DrawLine(
+                xAxisOriginA,
+                xAxisOriginA + Vector3.left * rayLength,
+                Color.red,
+                Time.deltaTime);
+        Debug.DrawLine(
+                xAxisOriginB,
+                xAxisOriginB + Vector3.left * rayLength,
+                Color.red,
+                Time.deltaTime);
+
+        Debug.DrawLine(
+                xAxisOriginA,
+                xAxisOriginA + Vector3.right * rayLength,
+                Color.red,
+                Time.deltaTime);
+        Debug.DrawLine(
+                xAxisOriginB,
+                xAxisOriginB + Vector3.right * rayLength,
+                Color.red,
+                Time.deltaTime);
+
+
         if (isFalling)
         {
             if (transform.position.y <= targetFallHeight)
@@ -113,6 +172,8 @@ public class Player_Movement : MonoBehaviour
             }
         }
 
+        // Handle player input
+        // Also handle moving up 1 level
 
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -124,6 +185,7 @@ public class Player_Movement : MonoBehaviour
             }
             else if (CanMoveUp(Vector3.forward))
             {
+                
                 targetPos = transform.position + cameraRotator.transform.forward + Vector3.up;
                 startPos = transform.position;
                 isMoving = true;
@@ -176,32 +238,24 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
+    //Check if the player can move
+
     bool CanMove(Vector3 direction)
     {
-        if (Vector3.Equals(Vector3.forward, direction) || Vector3.Equals(Vector3.back, direction))
+        if (direction.z != 0)
         {
-            if (Physics.Raycast(transform.position + Vector3.up * rayOffsetY + Vector3.right * rayOffsetX, direction, raylength))
-            {
-                return false;
-            }
-            if (Physics.Raycast(transform.position + Vector3.up * rayOffsetY - Vector3.right * rayOffsetX, direction, raylength))
-            {
-                return false;
-            }
+            if (Physics.Raycast(zAxisOriginA, direction, rayLength)) return false;
+            if (Physics.Raycast(zAxisOriginB, direction, rayLength)) return false;
         }
-        else if (Vector3.Equals(Vector3.left, direction) || Vector3.Equals(Vector3.right, direction))
+        else if (direction.x != 0)
         {
-            if (Physics.Raycast(transform.position + Vector3.up * rayOffsetY + Vector3.forward * rayOffsetZ, direction, raylength))
-            {
-                return false;
-            }
-            if (Physics.Raycast(transform.position + Vector3.up * rayOffsetY - Vector3.forward * rayOffsetZ, direction, raylength))
-            {
-                return false;
-            }
+            if (Physics.Raycast(xAxisOriginA, direction, rayLength)) return false;
+            if (Physics.Raycast(xAxisOriginB, direction, rayLength)) return false;
         }
         return true;
+
     }
+
 
     bool CanMoveUp(Vector3 direction)
     {
@@ -218,15 +272,20 @@ public class Player_Movement : MonoBehaviour
             return true;
         }
         return false;
+
     }
+
+    // Checks if the player will land on a walkable area
 
     void OnCollisionEnter(Collision other)
     {
         if (isFalling && (1 << other.gameObject.layer & walkableMask) == 0)
         {
+            // Find a nearby vacant square to push us on to
+
             Vector3 direction = Vector3.zero;
             Vector3[] directions = { Vector3.forward, Vector3.right, Vector3.back, Vector3.left };
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)//look at a foreach instead
             {
                 if (Physics.OverlapSphere(transform.position + directions[i], 0.1f).Length == 0)
                 {

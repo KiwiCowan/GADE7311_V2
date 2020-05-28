@@ -17,13 +17,13 @@ public class CameraMovement : MonoBehaviour
 
     Vector3 offset;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         offset = target.position + transform.position;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         Vector3 cameraTargetPos = target.position + offset;

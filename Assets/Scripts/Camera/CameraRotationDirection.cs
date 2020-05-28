@@ -30,7 +30,4 @@ public static class CameraRotationDirection
     }
 }
 
-//public class CameraRotationDirection : MonoBehaviour
-//{
 
-//}
