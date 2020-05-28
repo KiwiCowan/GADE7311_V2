@@ -19,11 +19,32 @@ public class Player_Movement : MonoBehaviour
 
     Vector3 targetPos;
     Vector3 startPos;
+    //idk
+    Vector3 xOffset;
+    Vector3 yOffset;
+    Vector3 zOffset;
+    Vector3 zAxisOriginA;
+    Vector3 zAxisOriginB;
+    Vector3 xAxisOriginA;
+    Vector3 xAxisOriginB;
 
     bool isMoving;
 
     [SerializeField]
     Transform cameraRotator = null;
+
+    [SerializeField]
+    LayerMask walkableMask = 0;
+    [SerializeField]
+    LayerMask collidableMask = 0;
+
+    [SerializeField]
+    float maxFallCastDistance = 100f;
+    [SerializeField]
+    float fallSpeed = 30f;
+
+    bool isFalling;
+    float targetFallHeight;
 
     void Update()
     {

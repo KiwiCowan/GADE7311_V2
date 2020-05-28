@@ -24,7 +24,7 @@ public class CameraRotationTrigger : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log("trigged");
+        
         if (other.tag == "Player")
         {
             cameraRotation.RotateTo(CameraRotationDirection.ToVector(targetDirection));

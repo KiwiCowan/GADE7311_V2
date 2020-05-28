@@ -25,6 +25,6 @@ public class CameraRotation : MonoBehaviour
     {
         Vector3 relativePos = transform.position + to;
 
-        targetRotation = Quaternion.LookRotation(relativePos - transform.position - transform.position, Vector3.up);
+        targetRotation = Quaternion.LookRotation(relativePos - transform.position, Vector3.up);
     }
 }
