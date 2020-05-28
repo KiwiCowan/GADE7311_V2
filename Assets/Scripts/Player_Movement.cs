@@ -122,12 +122,24 @@ public class Player_Movement : MonoBehaviour
                 startPos = transform.position;
                 isMoving = true;
             }
+            else if (CanMoveUp(Vector3.forward))
+            {
+                targetPos = transform.position + cameraRotator.transform.forward + Vector3.up;
+                startPos = transform.position;
+                isMoving = true;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             if (CanMove(Vector3.back))
             {
                 targetPos = transform.position - cameraRotator.transform.forward;
+                startPos = transform.position;
+                isMoving = true;
+            }
+            else if (CanMoveUp(Vector3.back))
+            {
+                targetPos = transform.position - cameraRotator.transform.forward + Vector3.up;
                 startPos = transform.position;
                 isMoving = true;
             }
@@ -140,12 +152,24 @@ public class Player_Movement : MonoBehaviour
                 startPos = transform.position;
                 isMoving = true;
             }
+            else if (CanMoveUp(Vector3.left))
+            {
+                targetPos = transform.position - cameraRotator.transform.right + Vector3.up;
+                startPos = transform.position;
+                isMoving = true;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             if (CanMove(Vector3.right))
             {
                 targetPos = transform.position + cameraRotator.transform.right;
+                startPos = transform.position;
+                isMoving = true;
+            }
+            else if (CanMoveUp(Vector3.right))
+            {
+                targetPos = transform.position + cameraRotator.transform.right + Vector3.up;
                 startPos = transform.position;
                 isMoving = true;
             }
@@ -177,5 +201,40 @@ public class Player_Movement : MonoBehaviour
             }
         }
         return true;
+    }
+
+    bool CanMoveUp(Vector3 direction)
+    {
+        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.up, 1f, collidableMask))
+        {
+            return false;
+        }
+        if (Physics.Raycast(transform.position + Vector3.up * 1.5f, direction, 1f, collidableMask))
+        {
+            return false;
+        }
+        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, direction, 1f, walkableMask))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (isFalling && (1 << other.gameObject.layer & walkableMask) == 0)
+        {
+            Vector3 direction = Vector3.zero;
+            Vector3[] directions = { Vector3.forward, Vector3.right, Vector3.back, Vector3.left };
+            for (int i = 0; i < 4; i++)
+            {
+                if (Physics.OverlapSphere(transform.position + directions[i], 0.1f).Length == 0)
+                {
+                    direction = directions[i];
+                    break;
+                }
+            }
+            transform.position += direction;
+        }
     }
 }
