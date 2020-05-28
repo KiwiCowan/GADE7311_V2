@@ -1,4 +1,4 @@
-﻿ using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class CameraRotation : MonoBehaviour
     float speed = 360f;
 
     Quaternion targetRotation = Quaternion.identity;
-    
+
     // Update is called once per frame
     void Update()
     {
