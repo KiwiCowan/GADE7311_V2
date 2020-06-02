@@ -17,13 +17,13 @@ public class CameraMovement : MonoBehaviour
 
     Vector3 offset;
 
-    
+
     void Start()
     {
         offset = target.position + transform.position;
     }
 
-    
+
     void Update()
     {
         Vector3 cameraTargetPos = target.position + offset;

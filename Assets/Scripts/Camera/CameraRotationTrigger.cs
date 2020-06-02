@@ -15,7 +15,7 @@ public class CameraRotationTrigger : MonoBehaviour
 
     CameraRotation cameraRotation = null;
 
-    
+
     void Start()
     {
         cameraRotation = cameraRorator.GetComponent<CameraRotation>();

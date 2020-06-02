@@ -185,7 +185,7 @@ public class Player_Movement : MonoBehaviour
             }
             else if (CanMoveUp(Vector3.forward))
             {
-                
+
                 targetPos = transform.position + cameraRotator.transform.forward + Vector3.up;
                 startPos = transform.position;
                 isMoving = true;
