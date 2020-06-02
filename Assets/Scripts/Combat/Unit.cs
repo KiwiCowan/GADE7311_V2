@@ -6,6 +6,7 @@ public class Unit : MonoBehaviour
 {
     public string unitName;
     public int unitLevel;
+    public int unitHealing;
 
     public int damage;
 
@@ -26,9 +27,9 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void Heal(int hp)
+    public void Heal()
     {
-        currentHP += hp;
+        currentHP += unitHealing;
         if (currentHP > maxHP)
         {
             currentHP = maxHP;

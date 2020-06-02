@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Player 2
   unitLevel: 2
+  unitHealing: 5
   damage: 5
   maxHP: 30
   currentHP: 20
