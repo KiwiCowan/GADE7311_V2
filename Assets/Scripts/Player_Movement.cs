@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Player_Movement : MonoBehaviour
 {
+    
+    public int turns = 10;
     [SerializeField]
     float speed = 0.25f;
     [SerializeField]
@@ -46,8 +50,19 @@ public class Player_Movement : MonoBehaviour
     bool isFalling;
     float targetFallHeight;
 
+   // GameObject manager;
+
     void Update()
     {
+        //manager.Turns = turns;
+        //if (turns == 0)
+        //{
+        //    manager.GetComponent<Turn>() = Turn.PLAYER1;
+        //    turns = 10;
+        //    manager.Turns = 10;
+        //    Debug.Log("next turn");
+        //}
+
         // Set the ray positions every frame
 
         yOffset = transform.position + Vector3.up * rayOffsetY;
@@ -242,6 +257,7 @@ public class Player_Movement : MonoBehaviour
 
     bool CanMove(Vector3 direction)
     {
+        
         if (direction.z != 0)
         {
             if (Physics.Raycast(zAxisOriginA, direction, rayLength)) return false;
@@ -252,13 +268,15 @@ public class Player_Movement : MonoBehaviour
             if (Physics.Raycast(xAxisOriginA, direction, rayLength)) return false;
             if (Physics.Raycast(xAxisOriginB, direction, rayLength)) return false;
         }
+        turns--;
         return true;
-
+       
     }
 
 
     bool CanMoveUp(Vector3 direction)
     {
+        
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.up, 1f, collidableMask))
         {
             return false;
@@ -269,6 +287,7 @@ public class Player_Movement : MonoBehaviour
         }
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, direction, 1f, walkableMask))
         {
+            turns--;
             return true;
         }
         return false;

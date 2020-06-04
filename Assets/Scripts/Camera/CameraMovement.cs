@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    //[SerializeField]
+    //Transform player1Trans = null;
+    //[SerializeField]
+    //Transform player2Trans = null;
     [SerializeField]
     Transform target = null;
     [SerializeField]
@@ -17,15 +21,26 @@ public class CameraMovement : MonoBehaviour
 
     Vector3 offset;
 
+    //public Turn turn;
 
     void Start()
     {
+        
+        //target = player1Trans;
         offset = target.position + transform.position;
     }
 
 
     void Update()
     {
+        //if(turn == Turn.PLAYER1)
+        //{
+        //    target = player1Trans;
+        //}
+        //else 
+        //{
+        //    target = player2Trans;
+        //}
         Vector3 cameraTargetPos = target.position + offset;
         Vector3 heading = cameraTargetPos - transform.position;
         float distance = heading.magnitude;
