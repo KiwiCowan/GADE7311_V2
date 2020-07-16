@@ -17,6 +17,7 @@ MonoBehaviour:
   damage: 0
   buff: 4
   cooldown: 3
+  onCooldown: 1
   hasEffect: 0
   effectName: 
   effectDamage: 0

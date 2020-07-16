@@ -32,13 +32,13 @@ public class Game_Manager : MonoBehaviour
             NextTurn();
             //turn = Turn.PLAYER2;
             //transform.position = player1.transform.position;
-            
+
         }
         //else
         //{
         //    //turn = Turn.PLAYER1;
         //    //transform.position = player2.transform.position;
-            
+
         //}
     }
     public void NextTurn()
@@ -70,6 +70,6 @@ public class Game_Manager : MonoBehaviour
     {
         player2.SetActive(true);
         player1.SetActive(false);
-        
+
     }
 }

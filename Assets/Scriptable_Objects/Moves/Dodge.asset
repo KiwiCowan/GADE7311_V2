@@ -17,6 +17,7 @@ MonoBehaviour:
   damage: 0
   buff: 0
   cooldown: 2
+  onCooldown: 0
   hasEffect: 1
   effectName: Dodge
   effectDamage: 0

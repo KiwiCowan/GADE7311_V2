@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Dark_Axe
   m_EditorClassIdentifier: 
   moveName: Necrrosis
-  moveType: Damage
+  moveType: 0
   damage: 10
   buff: 0
   cooldown: 3
+  onCooldown: 1
   hasEffect: 1
   effectName: Necrrosis
   effectDamage: 3

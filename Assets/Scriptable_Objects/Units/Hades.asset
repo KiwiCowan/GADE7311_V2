@@ -19,6 +19,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 45f2a89642c9878479505157840b23fa, type: 2}
   - {fileID: 11400000, guid: 10f74fc5ff5984e4da739140f0bbd887, type: 2}
   - {fileID: 11400000, guid: 4431a51629a1d2845a786b5583ab2a63, type: 2}
-  lastMove: {fileID: 0}
+  lastMove: {fileID: 11400000, guid: 8a289c9ab6c321f4f837bbff32c572e2, type: 2}
   role: 2
   unitModel: {fileID: 0}

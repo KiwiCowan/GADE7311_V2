@@ -12,5 +12,5 @@ public class Unit_Stats : ScriptableObject
     public UnitRole role;
     public GameObject unitModel;
 
-    
+
 }

@@ -8,7 +8,7 @@ public class Battle_Log_HUD : MonoBehaviour
 {
     public TextMeshProUGUI BattleLogText;
     //public TextMeshProUGUI currentPlayerText;
-   // public TextMeshProUGUI lastMoveText;
+    // public TextMeshProUGUI lastMoveText;
     public TextMeshProUGUI move1Text;
     public TextMeshProUGUI move2Text;
     public TextMeshProUGUI move3Text;
@@ -21,7 +21,7 @@ public class Battle_Log_HUD : MonoBehaviour
     {
         BattleLogText.text = unit.unitStats.name + " choose an action:";
         //currentPlayerText.text = unit.unitStats.role.ToString();
-        //  lastMoveText.text = unit.unitStats.lastMove.moveName;
+        //lastMoveText.text = unit.unitStats.lastMove.moveName;
         move1Text.text = unit.unitStats.moves[0].moveName;
         move2Text.text = unit.unitStats.moves[1].moveName;
         move3Text.text = unit.unitStats.moves[2].moveName;
@@ -31,12 +31,12 @@ public class Battle_Log_HUD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

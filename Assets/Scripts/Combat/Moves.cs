@@ -5,10 +5,11 @@ using UnityEngine;
 public enum MoveType
 {
     DAMAGE,
-    BUFF
+    BUFF,
+    DEFAULT
 }
 
-[CreateAssetMenu(fileName ="New Move", menuName = "Move")]
+[CreateAssetMenu(fileName = "New Move", menuName = "Move")]
 public class Moves : ScriptableObject
 {
     public string moveName;
@@ -16,11 +17,12 @@ public class Moves : ScriptableObject
     public int damage;
     public int buff;
     public int cooldown;
+    public bool onCooldown;
 
     public bool hasEffect;
     public string effectName;
     public int effectDamage;
     public int effectDuration;
 
-    
+
 }

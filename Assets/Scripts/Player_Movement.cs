@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
-    
+
     public int turns = 10;
     [SerializeField]
     float speed = 0.25f;
@@ -50,7 +50,7 @@ public class Player_Movement : MonoBehaviour
     bool isFalling;
     float targetFallHeight;
 
-   // GameObject manager;
+    // GameObject manager;
 
     void Update()
     {
@@ -257,7 +257,7 @@ public class Player_Movement : MonoBehaviour
 
     bool CanMove(Vector3 direction)
     {
-        
+
         if (direction.z != 0)
         {
             if (Physics.Raycast(zAxisOriginA, direction, rayLength)) return false;
@@ -270,13 +270,13 @@ public class Player_Movement : MonoBehaviour
         }
         turns--;
         return true;
-       
+
     }
 
 
     bool CanMoveUp(Vector3 direction)
     {
-        
+
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.up, 1f, collidableMask))
         {
             return false;
