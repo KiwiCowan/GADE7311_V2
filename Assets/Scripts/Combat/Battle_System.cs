@@ -19,16 +19,20 @@ public class Battle_System : MonoBehaviour
     public GameObject player1Prefab;
     public GameObject player2Prefab;
 
-    public Transform player1BattleStation;
-    public Transform player2BattleStation;
+    public Transform currentPlayerBattleStation;
+    public Transform nextPlayerBattleStation;
 
-    Unit player1Unit;
-    Unit player2Unit;
-
+    Unit currentPlayer;
+    Unit nextPlayer;
+    
+    GameObject player1GO;
+    GameObject player2GO;
+    
     public TextMeshProUGUI dialogueText;
 
-    public Battle_HUD player1HUD;
-    public Battle_HUD player2HUD;
+    public Battle_HUD currentPlayerHUD;
+    public Battle_HUD nextPlayerHUD;
+    public Battle_Log_HUD battleLogHUD;
 
     public BattleState state;
     // Start is called before the first frame update
@@ -40,16 +44,17 @@ public class Battle_System : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
-        GameObject player1GO = Instantiate(player1Prefab, player1BattleStation);
-        player1Unit = player1GO.GetComponent<Unit>();
+        player1GO = Instantiate(player1Prefab, currentPlayerBattleStation);
+        currentPlayer = player1GO.GetComponent<Unit>();
 
-        GameObject player2GO = Instantiate(player2Prefab, player2BattleStation);
-        player2Unit = player2GO.GetComponent<Unit>();
+        player2GO = Instantiate(player2Prefab, nextPlayerBattleStation);
+        nextPlayer = player2GO.GetComponent<Unit>();
 
-        dialogueText.text = "A wild " + player2Unit.unitName + " approaches";
+        dialogueText.text = "A wild " + nextPlayer.unitStats.name + " approaches";
 
-        player1HUD.SetHUD(player1Unit);
-        player2HUD.SetHUD(player2Unit);
+        currentPlayerHUD.SetHUD(currentPlayer);
+        nextPlayerHUD.SetHUD(nextPlayer);
+
 
         yield return new WaitForSeconds(2f);
 
@@ -59,25 +64,50 @@ public class Battle_System : MonoBehaviour
 
     void Player1Turn()
     {
-        dialogueText.text = player1Unit.unitName + " choose an action:";
+        dialogueText.text = currentPlayer.unitStats.name + " choose an action:";
+
+        currentPlayer = player1GO.GetComponent<Unit>();
+        nextPlayer = player2GO.GetComponent<Unit>();
+
+        //currentPlayerHUD.SetHUD(currentPlayer);
+        //nextPlayerHUD.SetHUD(nextPlayer);
+        //battleLogHUD.SetHUD(currentPlayer);
+
+        player1GO.transform.position = currentPlayerBattleStation.position;
+        player2GO.transform.position = nextPlayerBattleStation.position;
     }
 
     void Player2Turn()
     {
-        dialogueText.text = player2Unit.unitName + " choose an action:";
+        dialogueText.text = nextPlayer.unitStats.name + " choose an action:";
+
+
+        //currentPlayerHUD.SetHUD(nextPlayer);
+        //nextPlayerHUD.SetHUD(currentPlayer);
+        //battleLogHUD.SetHUD(nextPlayer);
+
+        player2GO.transform.position = currentPlayerBattleStation.position;
+        player1GO.transform.position = nextPlayerBattleStation.position;
+    }
+
+    public void UpdateHUDs()
+    {
+        currentPlayerHUD.SetHUD(currentPlayer);
+        nextPlayerHUD.SetHUD(nextPlayer);
+        battleLogHUD.SetHUD(currentPlayer);
     }
 
     //IEnumerator Player2Turn()
     //{
-    //    dialogueText.text = player2Unit.unitName + " attacks!";
+    //    dialogueText.text = nextPlayer.unitName + " attacks!";
 
     //    yield return new WaitForSeconds(1f);
 
 
 
-    //    bool isDead = player1Unit.TakeDamage(player2Unit.damage);
+    //    bool isDead = currentPlayer.TakeDamage(nextPlayer.damage);
 
-    //    player1HUD.SetHP(player1Unit.currentHP);
+    //    currentPlayerHUD.SetHP(currentPlayer.currentHP);
 
     //    dialogueText.text = "The attack was successful";
 
@@ -99,11 +129,11 @@ public class Battle_System : MonoBehaviour
     {
         if (state == BattleState.PLAYER1)
         {
-            StartCoroutine(PlayerAttack(player1Unit, player2Unit));
+            StartCoroutine(PlayerAttack(currentPlayer, nextPlayer));
         }
         else if (state == BattleState.PLAYER2)
         {
-            StartCoroutine(PlayerAttack(player2Unit, player1Unit));
+            StartCoroutine(PlayerAttack(nextPlayer, currentPlayer));
         }
 
         //if (state != BattleState.PLAYER1)
@@ -116,10 +146,11 @@ public class Battle_System : MonoBehaviour
 
     IEnumerator PlayerAttack(Unit  currentUnit,Unit enemyUnit)
     {
-        bool isDead = enemyUnit.TakeDamage(currentUnit.damage);
+        bool isDead = false;
+            //enemyUnit.TakeDamage(currentUnit.damage);
 
-        player2HUD.SetHP(player2Unit.currentHP);
-        player1HUD.SetHP(player1Unit.currentHP);
+        nextPlayerHUD.SetHP(nextPlayer.currentHP);
+        currentPlayerHUD.SetHP(currentPlayer.currentHP);
         dialogueText.text = "The attack was successful";
 
         yield return new WaitForSeconds(2f);
@@ -158,11 +189,11 @@ public class Battle_System : MonoBehaviour
     {
         if (state == BattleState.PLAYER1)
         {
-            StartCoroutine(PlayerHeal(player1Unit));
+            StartCoroutine(PlayerHeal(currentPlayer));
         }
         else if (state == BattleState.PLAYER2)
         {
-            StartCoroutine(PlayerHeal(player2Unit));
+            StartCoroutine(PlayerHeal(nextPlayer));
         }
 
        // StartCoroutine(PlayerHeal());
@@ -170,25 +201,30 @@ public class Battle_System : MonoBehaviour
 
     IEnumerator PlayerHeal(Unit unit)
     {
-        unit.Heal();
-        dialogueText.text = unit.unitName + " healed themselves";
-        player1HUD.SetHP(player1Unit.currentHP);
-        player2HUD.SetHP(player2Unit.currentHP);
+        //unit.Heal();
+        dialogueText.text = unit.unitStats.name + " healed themselves";
+        currentPlayerHUD.SetHP(currentPlayer.currentHP);
+        nextPlayerHUD.SetHP(nextPlayer.currentHP);
 
         yield return new WaitForSeconds(2f);
 
         NextTurn();
     }
 
+    public void OnMoveButton(int move)
+    {
+
+    }
+
     void EndBattle()
     {
         if (state == BattleState.WON)
         {
-            dialogueText.text = player1Unit.unitName + " wins the battle";
+            dialogueText.text = currentPlayer.unitStats.name + " wins the battle";
         }
         else if (state == BattleState.LOST)
         {
-            dialogueText.text = player2Unit.unitName + " wins the battle";
+            dialogueText.text = nextPlayer.unitStats.name + " wins the battle";
         }
     }
 }

@@ -44,10 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a89c7b34ddd91c468b24bd57ad05d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: Player 2
-  unitLevel: 2
-  unitHealing: 5
-  damage: 5
+  unitStats: {fileID: 11400000, guid: 3daa5117d37da1d4daf7f443b1ec382e, type: 2}
   maxHP: 30
   currentHP: 20
 --- !u!1 &9063756545150575862

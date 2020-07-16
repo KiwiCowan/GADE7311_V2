@@ -2,16 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum UnitRole
+{
+    UNASSIGNED,
+    PLAYER1,
+    PLAYER2,
+    ENEMY
+}
 public class Unit : MonoBehaviour
 {
-    public string unitName;
-    public int unitLevel;
-    public int unitHealing;
+    public Unit_Stats unitStats;
+    //public string unitName;
+    //public string unitRole;
+    //public string unitLastMove;
 
-    public int damage;
+    
+
+    //public int unitLevel;
+    //public int unitHealing;
+
+    //public int damage;
 
     public int maxHP;
     public int currentHP;
+
+    public void Awake()
+    {
+        maxHP = unitStats.hp;
+        currentHP = unitStats.hp;
+    }
 
     public bool TakeDamage(int dmg)
     {
@@ -27,9 +46,9 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void Heal()
+    public void Heal(int heal)
     {
-        currentHP += unitHealing;
+        currentHP += heal;
         if (currentHP > maxHP)
         {
             currentHP = maxHP;
