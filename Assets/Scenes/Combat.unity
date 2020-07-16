@@ -592,12 +592,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 750518400}
-        m_MethodName: OnHealButton
-        m_Mode: 1
+        m_MethodName: OnMoveButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1941,8 +1941,8 @@ GameObject:
   m_Component:
   - component: {fileID: 681960587}
   - component: {fileID: 681960590}
-  - component: {fileID: 681960589}
   - component: {fileID: 681960588}
+  - component: {fileID: 681960589}
   m_Layer: 5
   m_Name: Move_4_Button
   m_TagString: Untagged
@@ -2012,7 +2012,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 681960589}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 750518400}
+        m_MethodName: OnMoveButton
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &681960589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2922,7 +2933,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3500,17 +3511,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: b45ee7870516dbb42bc6f7ebb83ab907, type: 3}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 750518400}
+        m_MethodName: OnMoveButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &1435206766
 MonoBehaviour:
   m_ObjectHideFlags: 0

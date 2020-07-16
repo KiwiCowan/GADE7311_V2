@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dodge
   m_EditorClassIdentifier: 
   moveName: Dodge
-  moveType: Defence
+  moveType: 1
   damage: 0
   buff: 0
   cooldown: 2

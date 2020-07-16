@@ -24,10 +24,11 @@ public class Battle_System : MonoBehaviour
 
     Unit currentPlayer;
     Unit nextPlayer;
-    
+
     GameObject player1GO;
     GameObject player2GO;
-    
+
+    Moves currentMove;
     public TextMeshProUGUI dialogueText;
 
     public Battle_HUD currentPlayerHUD;
@@ -35,6 +36,8 @@ public class Battle_System : MonoBehaviour
     public Battle_Log_HUD battleLogHUD;
 
     public BattleState state;
+    public MoveType moveType;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,10 +72,12 @@ public class Battle_System : MonoBehaviour
         currentPlayer = player1GO.GetComponent<Unit>();
         nextPlayer = player2GO.GetComponent<Unit>();
 
+        UpdateHUDs();
         //currentPlayerHUD.SetHUD(currentPlayer);
         //nextPlayerHUD.SetHUD(nextPlayer);
         //battleLogHUD.SetHUD(currentPlayer);
 
+        UpdateHUDs();
         player1GO.transform.position = currentPlayerBattleStation.position;
         player2GO.transform.position = nextPlayerBattleStation.position;
     }
@@ -81,10 +86,13 @@ public class Battle_System : MonoBehaviour
     {
         dialogueText.text = nextPlayer.unitStats.name + " choose an action:";
 
+        currentPlayer = player2GO.GetComponent<Unit>();
+        nextPlayer = player1GO.GetComponent<Unit>();
 
         //currentPlayerHUD.SetHUD(nextPlayer);
         //nextPlayerHUD.SetHUD(currentPlayer);
         //battleLogHUD.SetHUD(nextPlayer);
+        UpdateHUDs();
 
         player2GO.transform.position = currentPlayerBattleStation.position;
         player1GO.transform.position = nextPlayerBattleStation.position;
@@ -95,6 +103,62 @@ public class Battle_System : MonoBehaviour
         currentPlayerHUD.SetHUD(currentPlayer);
         nextPlayerHUD.SetHUD(nextPlayer);
         battleLogHUD.SetHUD(currentPlayer);
+    }
+
+    public void OnMoveButton(int move)
+    {
+        currentMove = currentPlayer.unitStats.moves[move];
+
+       
+
+        if (moveType == MoveType.DAMAGE)
+        {
+            StartCoroutine(DamageMove()); ;
+        }
+        else if (moveType == MoveType.BUFF)
+        {
+            StartCoroutine(BuffMove());
+        }
+    }
+
+    IEnumerator DamageMove()
+    {
+        bool isDead = nextPlayer.TakeDamage(currentMove.damage);
+        //enemyUnit.TakeDamage(currentUnit.damage);
+
+        //nextPlayerHUD.SetHP(nextPlayer.currentHP);
+        //currentPlayerHUD.SetHP(currentPlayer.currentHP);
+        
+
+
+        dialogueText.text = "The attack was successful";
+
+        yield return new WaitForSeconds(2f);
+
+        if (isDead && state == BattleState.PLAYER1)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else if (isDead && state == BattleState.PLAYER2)
+        {
+            state = BattleState.LOST;
+            EndBattle();
+        }
+        else
+        {
+            NextTurn();
+            // StartCoroutine(Player2Turn());
+        }
+
+        
+    }
+
+    IEnumerator BuffMove()
+    {
+        yield return new WaitForSeconds(2f);
+        Debug.Log("move");
+        Player2Turn();
     }
 
     //IEnumerator Player2Turn()
@@ -144,10 +208,10 @@ public class Battle_System : MonoBehaviour
         //StartCoroutine(PlayerAttack());
     }
 
-    IEnumerator PlayerAttack(Unit  currentUnit,Unit enemyUnit)
+    IEnumerator PlayerAttack(Unit currentUnit, Unit enemyUnit)
     {
         bool isDead = false;
-            //enemyUnit.TakeDamage(currentUnit.damage);
+        //enemyUnit.TakeDamage(currentUnit.damage);
 
         nextPlayerHUD.SetHP(nextPlayer.currentHP);
         currentPlayerHUD.SetHP(currentPlayer.currentHP);
@@ -160,7 +224,7 @@ public class Battle_System : MonoBehaviour
             state = BattleState.WON;
             EndBattle();
         }
-        else if(isDead && state == BattleState.PLAYER2)
+        else if (isDead && state == BattleState.PLAYER2)
         {
             state = BattleState.LOST;
             EndBattle();
@@ -168,13 +232,13 @@ public class Battle_System : MonoBehaviour
         else
         {
             NextTurn();
-           // StartCoroutine(Player2Turn());
+            // StartCoroutine(Player2Turn());
         }
     }
 
     void NextTurn()
     {
-        if(state == BattleState.PLAYER1)
+        if (state == BattleState.PLAYER1)
         {
             state = BattleState.PLAYER2;
             Player2Turn();
@@ -196,7 +260,7 @@ public class Battle_System : MonoBehaviour
             StartCoroutine(PlayerHeal(nextPlayer));
         }
 
-       // StartCoroutine(PlayerHeal());
+        // StartCoroutine(PlayerHeal());
     }
 
     IEnumerator PlayerHeal(Unit unit)
@@ -211,10 +275,7 @@ public class Battle_System : MonoBehaviour
         NextTurn();
     }
 
-    public void OnMoveButton(int move)
-    {
 
-    }
 
     void EndBattle()
     {

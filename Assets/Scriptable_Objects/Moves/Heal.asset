@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   moveName: Heal
-  moveType: Defence
+  moveType: 1
   damage: 0
   buff: 4
   cooldown: 3

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hecate's_Curse
   m_EditorClassIdentifier: 
   moveName: Curse
-  moveType: Damage
+  moveType: 0
   damage: 10
   buff: 0
   cooldown: 3
