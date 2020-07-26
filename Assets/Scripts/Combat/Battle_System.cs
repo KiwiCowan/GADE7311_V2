@@ -53,6 +53,15 @@ public class Battle_System : MonoBehaviour
         player2GO = Instantiate(player2Prefab, nextPlayerBattleStation);
         nextPlayer = player2GO.GetComponent<Unit>();
 
+        foreach (Moves move in currentPlayer.unitStats.moves)
+        {
+            move.onCooldown = false;
+        }
+        foreach (Moves move in nextPlayer.unitStats.moves)
+        {
+            move.onCooldown = false;
+        }
+
         dialogueText.text = "A wild " + nextPlayer.unitStats.name + " approaches";
 
         currentPlayerHUD.SetHUD(currentPlayer);
@@ -71,6 +80,7 @@ public class Battle_System : MonoBehaviour
 
         currentPlayer = player1GO.GetComponent<Unit>();
         nextPlayer = player2GO.GetComponent<Unit>();
+        dialogueText.text = currentPlayer.unitStats.name + " choose an action:";
 
         //currentPlayerHUD.SetHUD(currentPlayer);
         //nextPlayerHUD.SetHUD(nextPlayer);
@@ -79,14 +89,14 @@ public class Battle_System : MonoBehaviour
         player1GO.transform.position = currentPlayerBattleStation.position;
         player2GO.transform.position = nextPlayerBattleStation.position;
 
-        dialogueText.text = currentPlayer.unitStats.name + " choose an action:";
+        //dialogueText.text = currentPlayer.unitStats.name + " choose an action:";
     }
 
     void Player2Turn()
     {
         currentPlayer = player2GO.GetComponent<Unit>();
         nextPlayer = player1GO.GetComponent<Unit>();
-
+        dialogueText.text = currentPlayer.unitStats.name + " choose an action:";
         //currentPlayerHUD.SetHUD(nextPlayer);
         //nextPlayerHUD.SetHUD(currentPlayer);
         //battleLogHUD.SetHUD(nextPlayer);
@@ -95,7 +105,7 @@ public class Battle_System : MonoBehaviour
         player2GO.transform.position = currentPlayerBattleStation.position;
         player1GO.transform.position = nextPlayerBattleStation.position;
 
-        dialogueText.text = nextPlayer.unitStats.name + " choose an action:";
+        //dialogueText.text = nextPlayer.unitStats.name + " choose an action:";
     }
 
     public void UpdateHUDs()
