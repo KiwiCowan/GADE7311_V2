@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum MoveType
 {
@@ -17,12 +18,13 @@ public class Moves : ScriptableObject
     public int damage;
     public int buff;
     public int cooldown;
-    public bool onCooldown;
+    public bool onCooldown = false;
 
     public bool hasEffect;
     public string effectName;
     public int effectDamage;
     public int effectDuration;
+    public Sprite moveIcon;
 
 
 }

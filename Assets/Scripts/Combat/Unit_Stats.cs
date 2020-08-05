@@ -11,6 +11,7 @@ public class Unit_Stats : ScriptableObject
     public Moves lastMove;
     public UnitRole role;
     public GameObject unitModel;
+    public Sprite unitSprite;
 
 
 }

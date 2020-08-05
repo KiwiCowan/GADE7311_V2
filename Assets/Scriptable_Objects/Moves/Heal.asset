@@ -17,8 +17,9 @@ MonoBehaviour:
   damage: 0
   buff: 4
   cooldown: 3
-  onCooldown: 1
+  onCooldown: 0
   hasEffect: 0
   effectName: 
   effectDamage: 0
   effectDuration: 0
+  moveIcon: {fileID: 21300000, guid: 2856b56d5a5a85b4390d206af458aa0f, type: 3}

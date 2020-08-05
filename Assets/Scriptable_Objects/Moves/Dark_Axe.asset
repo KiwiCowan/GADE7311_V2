@@ -17,8 +17,9 @@ MonoBehaviour:
   damage: 10
   buff: 0
   cooldown: 3
-  onCooldown: 1
+  onCooldown: 0
   hasEffect: 1
   effectName: Necrrosis
   effectDamage: 3
   effectDuration: 2
+  moveIcon: {fileID: 21300000, guid: 9a1c51b967eb5614099c7a38707acc00, type: 3}

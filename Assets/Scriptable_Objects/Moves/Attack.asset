@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   moveName: Attack
-  moveType: Damage
+  moveType: 0
   damage: 5
   buff: 0
   cooldown: 0
+  onCooldown: 0
   hasEffect: 0
   effectName: 
   effectDamage: 0
   effectDuration: 0
+  moveIcon: {fileID: 21300000, guid: 3f41dad5b1973624e9e75eabcafa9f20, type: 3}

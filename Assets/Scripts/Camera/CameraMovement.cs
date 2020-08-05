@@ -33,7 +33,7 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        //if(turn == Turn.PLAYER1)
+        //if(turn == Turn.P1)
         //{
         //    target = player1Trans;
         //}

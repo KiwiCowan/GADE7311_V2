@@ -22,3 +22,4 @@ MonoBehaviour:
   lastMove: {fileID: 11400000, guid: d5a2ac9c72705e74b9cb80db556bbfce, type: 2}
   role: 0
   unitModel: {fileID: 0}
+  unitSprite: {fileID: 21300000, guid: 809b5d88c930cbb45b703eb11cdca313, type: 3}

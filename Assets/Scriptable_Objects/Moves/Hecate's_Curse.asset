@@ -17,8 +17,9 @@ MonoBehaviour:
   damage: 10
   buff: 0
   cooldown: 3
-  onCooldown: 1
+  onCooldown: 0
   hasEffect: 1
   effectName: Cursed
   effectDamage: 3
   effectDuration: 2
+  moveIcon: {fileID: 21300000, guid: a3cce406df2a83f4b865a9faa081f222, type: 3}

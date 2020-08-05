@@ -30,13 +30,13 @@ public class Game_Manager : MonoBehaviour
         if (Turns == 0)
         {
             NextTurn();
-            //turn = Turn.PLAYER2;
+            //turn = Turn.P2;
             //transform.position = player1.transform.position;
 
         }
         //else
         //{
-        //    //turn = Turn.PLAYER1;
+        //    //turn = Turn.P1;
         //    //transform.position = player2.transform.position;
 
         //}

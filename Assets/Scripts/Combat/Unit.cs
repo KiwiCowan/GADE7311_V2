@@ -6,8 +6,8 @@ using UnityEngine;
 public enum UnitRole
 {
     UNASSIGNED,
-    PLAYER1,
-    PLAYER2,
+    P1,
+    P2,
     ENEMY
 }
 public class Unit : MonoBehaviour
@@ -30,11 +30,17 @@ public class Unit : MonoBehaviour
     public int maxHP;
     public int currentHP;
 
+    public bool hasEffect = false;
+    public String currentEffectName;
+    public int currentEffectDuration;
+    public int currentEffectDamage;
+
     public void Awake()
     {
         maxHP = unitStats.hp;
         currentHP = unitStats.hp;
-        moveCooldownText = new int[4];
+        
+        moveCooldownText = new int[6];
     }
 
     public bool TakeDamage(int dmg)
@@ -60,6 +66,14 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public void CurrentEffect(Moves move)
+    {
+        hasEffect = true;
+        currentEffectName = move.effectName;
+        currentEffectDamage = move.effectDamage;
+        currentEffectDuration = move.effectDuration;
+    }
+
     public void PutOnCooldown(Moves _move)
     {
         
@@ -77,18 +91,34 @@ public class Unit : MonoBehaviour
 
     public void UpdateCooldowns()
     {
-        for(int i = 0; i <= 3; i++)
+        for(int i = 0; i <= 5; i++)
         {
             if(moveCooldownText[i] > 0)
             {
                 moveCooldownText[i]--;
 
-                if (moveCooldownText[i] == 0)
+                if (moveCooldownText[i] <= 0)
                 {
                     unitStats.moves[i].onCooldown = false;
                 }
             }
             
         }
+    }
+
+    public void UpdateEffectDuration()
+    {
+        TakeDamage(currentEffectDamage);
+        currentEffectDuration--;
+
+        if (currentEffectDuration <= 0)
+        {
+            currentEffectDamage = default;
+            currentEffectDuration = default;
+            currentEffectName = default;
+            hasEffect = false;
+        }
+
+        
     }
 }

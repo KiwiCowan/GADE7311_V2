@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Flaming_Torch
   m_EditorClassIdentifier: 
   moveName: Flaming Torch
-  moveType: Damage
+  moveType: 0
   damage: 10
   buff: 0
   cooldown: 3
+  onCooldown: 0
   hasEffect: 1
   effectName: Burn
   effectDamage: 3
   effectDuration: 2
+  moveIcon: {fileID: 21300000, guid: 7855c0b72c8c6e5439d9ac364275fd0b, type: 3}

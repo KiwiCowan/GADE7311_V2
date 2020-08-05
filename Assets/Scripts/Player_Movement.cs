@@ -57,7 +57,7 @@ public class Player_Movement : MonoBehaviour
         //manager.Turns = turns;
         //if (turns == 0)
         //{
-        //    manager.GetComponent<Turn>() = Turn.PLAYER1;
+        //    manager.GetComponent<Turn>() = Turn.P1;
         //    turns = 10;
         //    manager.Turns = 10;
         //    Debug.Log("next turn");
